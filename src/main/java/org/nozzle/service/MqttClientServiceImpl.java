@@ -1,6 +1,7 @@
 package org.nozzle.service;
 
 import org.eclipse.paho.client.mqttv3.*;
+import org.nozzle.domain.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class MqttClientServiceImpl implements MqttClientService {
     private @Autowired MqttClient client;
 
     private @Autowired MqttConnectOptions options;
+
+    private @Autowired MessageService messageService;
 
     public MqttClientServiceImpl() {
     }
@@ -38,6 +41,7 @@ public class MqttClientServiceImpl implements MqttClientService {
     public void messageArrived(final String topic, final MqttMessage message) throws UnsupportedEncodingException {
         LOGGER.debug("Message {} has arrived to topic {}", message.getId(), topic);
         LOGGER.debug("Payload: {}", new String(message.getPayload(), "UTF-8"));
+        messageService.save(new Message((long)message.getId(), topic, new String(message.getPayload())));
     }
 
     @Override

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="org.nozzle.domain.Message" table="message" catalog="nozzle">
+        <id name="messageId" type="java.lang.Long">
+            <column name="MESSAGE_ID"/>
+        </id>
+        <property name="topic" type="string">
+            <column name="MESSAGE_TOPIC" length="64" not-null="true"/>
+        </property>
+        <property name="payload" type="string">
+            <column name="MESSAGE_PAYLOAD" length="128"/>
+        </property>
+    </class>
+</hibernate-mapping>
