@@ -10,7 +10,7 @@ public class NozzleController {
 
     private @Autowired MessageService messageService;
 
-    @RequestMapping("/")
+    @RequestMapping("/nozzle")
     public String index() {
         return String.format("Value is %s", messageService.getLatest().getPayload());
     }
